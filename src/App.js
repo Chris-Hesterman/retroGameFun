@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { initialState } from './utils/initialState';
+import Fleet from './components/Fleet';
+import ShieldRow from './components/ShieldRow';
+import Base from './components/Base';
+import styled from 'styled-components';
+import space from './images/space.jpg';
 
-function App() {
+const StyledApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: lime;
+  background-image: url(${space});
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+`;
+
+const App = () => {
+  const [fleetStatus, setFleetStatus] = useState(initialState);
+
+  const changeStatus = (shipId) => {
+    setFleetStatus((prevFleetStatus) => {
+      prevFleetStatus.fleet[shipId] = 0;
+      return { ...prevFleetStatus };
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledApp className="App">
+      <h1>game</h1>
+      <Fleet fleet={fleetStatus.fleet} changeStatus={changeStatus} />
+      <ShieldRow />
+      <Base />
+    </StyledApp>
   );
-}
+};
 
 export default App;
