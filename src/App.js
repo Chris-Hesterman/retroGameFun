@@ -10,7 +10,7 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   color: lime;
   background-image: url(${space});
   background-size: cover;
@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <StyledApp className="App">
-      <h1>game</h1>
+      <h1>Spaz Invaders</h1>
       <Fleet fleet={fleetStatus.fleet} changeStatus={changeStatus} />
       <ShieldRow />
       <Base />

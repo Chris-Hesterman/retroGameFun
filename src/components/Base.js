@@ -1,7 +1,12 @@
 import React from 'react';
+import Gun from './Gun';
 
 const Base = () => {
-  return <div>base</div>;
+  return (
+    <div>
+      <Gun />
+    </div>
+  );
 };
 
 export default Base;

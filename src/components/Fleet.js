@@ -6,8 +6,9 @@ const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 60vw;
-  background: black;
+  width: 60vw;
+  height: 20vw;
+  background: none;
 `;
 
 const Fleet = ({ fleet, changeStatus }) => {
@@ -15,8 +16,6 @@ const Fleet = ({ fleet, changeStatus }) => {
     if (e.target.nodeName !== 'DIV') {
       changeStatus(e.target.id);
     }
-
-    console.log(e);
   };
 
   const alienShips = fleet.map((ship, index, array) => {
