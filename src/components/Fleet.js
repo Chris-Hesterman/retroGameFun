@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import AlienShip from './AlienShip';
 import styled from 'styled-components';
 

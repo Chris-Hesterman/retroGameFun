@@ -20,6 +20,7 @@ const StyledApp = styled.div`
 
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
+  const [direction, setDirection] = useState(0);
 
   const changeStatus = (shipId) => {
     setFleetStatus((prevFleetStatus) => {
@@ -28,12 +29,30 @@ const App = () => {
     });
   };
 
+  const handleMove = (e) => {
+    if (
+      e.key !== direction &&
+      (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
+    ) {
+      setDirection(e.key);
+    }
+  };
+
+  const handleStop = (e) => {
+    setDirection(0);
+  };
+
   return (
-    <StyledApp className="App">
+    <StyledApp
+      className="App"
+      onKeyDown={handleMove}
+      onKeyUp={handleStop}
+      tabIndex="0"
+    >
       <h1>Spaz Invaders</h1>
       <Fleet fleet={fleetStatus.fleet} changeStatus={changeStatus} />
       <ShieldRow />
-      <Base />
+      <Base direction={direction} />
     </StyledApp>
   );
 };
