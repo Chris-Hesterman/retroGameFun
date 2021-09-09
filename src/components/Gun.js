@@ -37,7 +37,7 @@ const Gun = () => {
   const gunRef = useRef();
 
   const moveGun = (time) => {
-    console.log('animating', time);
+    // console.log('animating', time);
     if (speedRef.current === 0) {
       window.cancelAnimationFrame(requestId);
       return;
@@ -55,7 +55,7 @@ const Gun = () => {
     }
     posiRef.current += speedRef.current;
     gunRef.current.style.left = `${posiRef.current}px`;
-    console.log('handling move');
+    // console.log('handling move');
 
     window.requestAnimationFrame(moveGun);
   };
@@ -63,11 +63,11 @@ const Gun = () => {
   const handleMove = (e) => {
     let newSpeedRef;
     const speed = 5;
-    console.log('event firing');
+
     if (e.repeat && speedRef.current) {
       return;
     }
-
+    console.log('event firing', e.which);
     if (e.key === 'ArrowRight' && !keyRef.current.pressed !== e.key) {
       newSpeedRef = speed;
       keyRef.current.pressed = e.key;

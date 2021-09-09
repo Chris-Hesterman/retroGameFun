@@ -1,3 +1,3 @@
 export const initialState = {
-  fleet: new Array(45).fill(1)
+  fleet: new Array(55).fill(1)
 };

@@ -4,8 +4,10 @@ import styled from 'styled-components';
 
 const StyledRow = styled.div`
   display: flex;
-  width: 100vw;
+  width: 100%;
   justify-content: space-around;
+  position: absolute;
+  top: 700px;
 `;
 
 const ShieldRow = () => {

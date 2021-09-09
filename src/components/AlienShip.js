@@ -7,9 +7,10 @@ const StyledAlien = styled.span.attrs((props) => ({
   background: green;
   border-radius: 50%;
   border: 1px white solid;
-  width: 3.2rem;
-  height: 3.2rem;
-  margin: 5px 1rem;
+  padding: 0;
+  width: 2.65rem;
+  height: 2.65rem;
+  margin: 1rem 0.7rem;
   display: flex;
   justify-content: center;
   align-items: center;

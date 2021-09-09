@@ -6,12 +6,12 @@ const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 800px;
+  max-width: 800px;
   height: 300px;
   background: none;
   position: absolute;
-  top: 200px;
-  left: 300px;
+  /* top: 100px;
+  left: 300px; */
 `;
 
 const Fleet = forwardRef(({ fleet, changeStatus }, ref) => {
