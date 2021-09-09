@@ -1,16 +1,20 @@
 import AlienShip from './AlienShip';
 import styled from 'styled-components';
+import { useEffect, useRef, useState, forwardRef } from 'react';
 
 const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: 60vw;
-  height: 20vw;
+  width: 800px;
+  height: 300px;
   background: none;
+  position: absolute;
+  top: 200px;
+  left: 300px;
 `;
 
-const Fleet = ({ fleet, changeStatus }) => {
+const Fleet = forwardRef(({ fleet, changeStatus }, ref) => {
   const handleClick = (e) => {
     if (e.target.nodeName !== 'DIV') {
       changeStatus(e.target.id);
@@ -27,7 +31,11 @@ const Fleet = ({ fleet, changeStatus }) => {
       />
     );
   });
-  return <StyledFleet onClick={handleClick}>{alienShips}</StyledFleet>;
-};
+  return (
+    <StyledFleet ref={ref} onClick={handleClick}>
+      {alienShips}
+    </StyledFleet>
+  );
+});
 
 export default Fleet;

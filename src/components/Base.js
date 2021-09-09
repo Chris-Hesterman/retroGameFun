@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import Gun from './Gun';
 
 const StyledBase = styled.div`
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  top: 800px;
 `;
 
-const Base = ({ direction }) => {
+const Base = ({ direction, speed }) => {
   return (
-    <div>
-      <Gun direction={direction} />
-    </div>
+    <StyledBase>
+      <Gun />
+    </StyledBase>
   );
 };
 

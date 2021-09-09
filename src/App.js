@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { initialState } from './utils/initialState';
 import Fleet from './components/Fleet';
 import ShieldRow from './components/ShieldRow';
@@ -20,7 +20,22 @@ const StyledApp = styled.div`
 
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
-  const [direction, setDirection] = useState(0);
+  const posiRef = useRef(30);
+  const fleetRef = useRef(null);
+  let requestId;
+
+  const moveFleet = () => {
+    console.log('moving fleet', fleetRef);
+    const newPosiRef = posiRef.current + 3;
+
+    fleetRef.current.style.left = `${newPosiRef}px`;
+    posiRef.current = newPosiRef;
+    window.requestAnimationFrame(moveFleet);
+  };
+
+  const startInvasion = () => {
+    requestId = window.requestAnimationFrame(moveFleet);
+  };
 
   const changeStatus = (shipId) => {
     setFleetStatus((prevFleetStatus) => {
@@ -29,30 +44,21 @@ const App = () => {
     });
   };
 
-  const handleMove = (e) => {
-    if (
-      e.key !== direction &&
-      (e.key === 'ArrowLeft' || e.key === 'ArrowRight')
-    ) {
-      setDirection(e.key);
-    }
-  };
-
-  const handleStop = (e) => {
-    setDirection(0);
-  };
+  useEffect(() => {
+    fleetRef.current.style.left = '20px';
+    startInvasion();
+  }, []);
 
   return (
-    <StyledApp
-      className="App"
-      onKeyDown={handleMove}
-      onKeyUp={handleStop}
-      tabIndex="0"
-    >
-      <h1>Spaz Invaders</h1>
-      <Fleet fleet={fleetStatus.fleet} changeStatus={changeStatus} />
+    <StyledApp className="App">
+      <h1>Spayed Invaders</h1>
+      <Fleet
+        ref={fleetRef}
+        fleet={fleetStatus.fleet}
+        changeStatus={changeStatus}
+      />
       <ShieldRow />
-      <Base direction={direction} />
+      <Base />
     </StyledApp>
   );
 };
