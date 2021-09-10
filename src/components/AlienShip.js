@@ -4,23 +4,24 @@ const StyledAlien = styled.span.attrs((props) => ({
   id: props.id,
   visibility: props.status ? 'visible' : 'hidden'
 }))`
-  background: green;
-  border-radius: 50%;
-  border: 1px white solid;
+  font-family: 'invaders';
+  color: peachpuff;
+  font-size: 2.5rem;
   padding: 0;
   width: 2.65rem;
   height: 2.65rem;
-  margin: 1rem 0.7rem;
+  margin: 0.5rem 0.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
 `;
 
-const AlienShip = ({ status, id }) => {
+const AlienShip = ({ status, id, type }) => {
+  console.log('ship render');
   return (
     <StyledAlien id={id} status={status} className="ship">
-      '-_-'
+      <span>{type}</span>
     </StyledAlien>
   );
 };

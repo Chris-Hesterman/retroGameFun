@@ -5,6 +5,7 @@ import { useEffect, useRef, useState, forwardRef } from 'react';
 const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   max-width: 800px;
   height: 300px;
@@ -14,9 +15,10 @@ const StyledFleet = styled.div`
   left: 300px; */
 `;
 
-const Fleet = forwardRef(({ fleet, changeStatus }, ref) => {
+const Fleet = forwardRef(({ fleet, changeStatus, typeFlag }, ref) => {
   const handleClick = (e) => {
-    if (e.target.nodeName !== 'DIV') {
+    if (e.target.nodeName !== 'SPAN') {
+      console.log('name', e.target.nodeName);
       changeStatus(e.target.id);
     }
   };
@@ -27,7 +29,19 @@ const Fleet = forwardRef(({ fleet, changeStatus }, ref) => {
         status={fleet[index]}
         id={index}
         key={index}
-        className="ship"
+        type={
+          index <= 10
+            ? typeFlag
+              ? 'd'
+              : 'e'
+            : index <= 21
+            ? 'b'
+            : index <= 43
+            ? 'f'
+            : 'r'
+        }
+
+        // className="ship"
       />
     );
   });

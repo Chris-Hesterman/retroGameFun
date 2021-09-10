@@ -7,7 +7,7 @@ const StyledRow = styled.div`
   width: 100%;
   justify-content: space-around;
   position: absolute;
-  top: 700px;
+  top: 500px;
 `;
 
 const ShieldRow = () => {

@@ -6,25 +6,12 @@ const StyledGunWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 85%;
+  /* top: 400px; */
   left: calc(50vw - 40px);
 `;
-const StyledGun = styled.div`
-  margin-bottom: 1rem;
-  height: 0;
-  width: 0;
-  margin-bottom: 0;
-  border-top: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-left: 15px solid transparent;
-  border-bottom: 15px solid lime;
-`;
-
-const StyledGunBase = styled.div`
-  width: 5rem;
-  height: 2.5rem;
-  background-color: lime;
-  margin-top: 0;
+const StyledGun = styled.span`
+  font-family: 'invaders';
+  font-size: 5rem;
 `;
 
 const Gun = () => {
@@ -101,8 +88,7 @@ const Gun = () => {
 
   return (
     <StyledGunWrapper position={posiRef} speed={speedRef} ref={gunRef}>
-      <StyledGun />
-      <StyledGunBase />
+      <StyledGun>w</StyledGun>
     </StyledGunWrapper>
   );
 };

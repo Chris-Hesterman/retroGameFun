@@ -1,4 +1,19 @@
-body {
+import { createGlobalStyle } from 'styled-components';
+import invaders from './fonts/invaders.ttf';
+
+export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: 'invaders';
+    src: url(${invaders})
+      format('truetype');
+  }
+
+  html {
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
   margin: 0;
   height: 100vh;
   box-sizing: border-box;
@@ -9,7 +24,5 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+
+`;

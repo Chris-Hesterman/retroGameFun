@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { initialState } from './utils/initialState';
+import { GlobalStyle } from './GlobalStyle';
 import Fleet from './components/Fleet';
 import ShieldRow from './components/ShieldRow';
 import Base from './components/Base';
@@ -19,17 +20,25 @@ const StyledApp = styled.div`
   overflow: hidden;
 `;
 
+const StyledTitle = styled.h1`
+  color: black;
+  text-shadow: 2px 2px 2px lime, 0 2px 2px lime, 2px 0 2px lime, -2px 0 2px lime,
+    -2px -2px 2px lime, 0 -2px 2px lime;
+`;
+
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
+  const typeFlag = useRef(false);
   const position = useRef(30);
   const height = useRef(100);
   const fleetRef = useRef(null);
   let requestId;
   let speed = 20;
-  let interval = 500;
+  let interval = 1000;
 
   const moveFleet = () => {
     let newHeight;
+    typeFlag.current = !typeFlag.current;
     // console.log('height', height);
     if (position.current > 530) {
       speed = -speed;
@@ -76,11 +85,13 @@ const App = () => {
 
   return (
     <StyledApp className="App">
-      <h1>Spayed Invaders</h1>
+      <GlobalStyle />
+      <StyledTitle>Spayed Invaders</StyledTitle>
       <Fleet
         ref={fleetRef}
         fleet={fleetStatus.fleet}
         changeStatus={changeStatus}
+        typeFlag={typeFlag.current}
       />
       <ShieldRow />
       <Base />

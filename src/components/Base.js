@@ -5,7 +5,7 @@ import Gun from './Gun';
 const StyledBase = styled.div`
   width: 100%;
   position: absolute;
-  top: 800px;
+  top: 600px;
   left: 0;
 `;
 
