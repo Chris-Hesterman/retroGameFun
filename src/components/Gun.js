@@ -6,7 +6,6 @@ const StyledGunWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  /* top: 400px; */
   left: calc(50vw - 40px);
 `;
 const StyledGun = styled.span`

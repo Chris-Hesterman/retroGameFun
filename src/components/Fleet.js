@@ -6,6 +6,7 @@ const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  width: 600px;
   max-width: 620px;
   height: 265px;
   background: none;
@@ -26,7 +27,7 @@ const Fleet = forwardRef(({ fleet, changeStatus, shipRef }, ref) => {
         status={fleet[index]}
         id={index}
         key={index}
-        type={index <= 10 ? 'e' : index <= 32 ? 'b' : 'f'}
+        type={index <= 10 ? ['e', 'q'] : index <= 32 ? ['b', 'c'] : ['f', 'g']}
         ref={shipRef}
       />
     );

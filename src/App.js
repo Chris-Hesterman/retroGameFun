@@ -13,7 +13,14 @@ const StyledApp = styled.div`
   align-items: center;
   justify-content: flex-start;
   color: lime;
-  background-image: url(${space});
+  background: black;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url(${space});
+
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -28,7 +35,7 @@ const StyledTitle = styled.h1`
 
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
-  const position = useRef(30);
+  const position = useRef(20);
   const height = useRef(100);
   const fleetRef = useRef(null);
   const shipRef = useRef(null);
@@ -38,18 +45,18 @@ const App = () => {
   const moveFleet = () => {
     let newHeight;
     // console.log('height', height);
-    if (position.current > 530) {
+    if (position.current > 560) {
       speed = -speed;
       interval -= 75;
       console.log(speed);
-      newHeight = height.current + 50;
+      newHeight = height.current + 25;
       height.current = newHeight;
       fleetRef.current.style.top = `${newHeight}px`;
     }
-    if (position.current < 30) {
+    if (position.current < 20) {
       speed = -speed;
       interval -= 75;
-      newHeight = height.current + 50;
+      newHeight = height.current + 25;
       height.current = newHeight;
       fleetRef.current.style.top = `${newHeight}px`;
     }
