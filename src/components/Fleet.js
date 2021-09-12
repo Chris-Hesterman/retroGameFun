@@ -1,24 +1,21 @@
 import AlienShip from './AlienShip';
 import styled from 'styled-components';
-import { useEffect, useRef, useState, forwardRef } from 'react';
+import { forwardRef } from 'react';
 
 const StyledFleet = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-wrap: wrap;
-  max-width: 800px;
-  height: 300px;
+  max-width: 620px;
+  height: 265px;
   background: none;
   position: absolute;
-  /* top: 100px;
-  left: 300px; */
+  row-gap: 0;
 `;
 
-const Fleet = forwardRef(({ fleet, changeStatus, typeFlag }, ref) => {
+const Fleet = forwardRef(({ fleet, changeStatus, shipRef }, ref) => {
   const handleClick = (e) => {
     if (e.target.nodeName !== 'SPAN') {
-      console.log('name', e.target.nodeName);
       changeStatus(e.target.id);
     }
   };
@@ -29,24 +26,15 @@ const Fleet = forwardRef(({ fleet, changeStatus, typeFlag }, ref) => {
         status={fleet[index]}
         id={index}
         key={index}
-        type={
-          index <= 10
-            ? typeFlag
-              ? 'd'
-              : 'e'
-            : index <= 21
-            ? 'b'
-            : index <= 43
-            ? 'f'
-            : 'r'
-        }
-
-        // className="ship"
+        type={index <= 10 ? 'e' : index <= 32 ? 'b' : 'f'}
+        ref={shipRef}
       />
     );
   });
+
   return (
     <StyledFleet ref={ref} onClick={handleClick}>
+      {console.log('fleet render')}
       {alienShips}
     </StyledFleet>
   );

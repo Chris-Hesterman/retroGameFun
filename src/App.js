@@ -28,17 +28,15 @@ const StyledTitle = styled.h1`
 
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
-  const typeFlag = useRef(false);
   const position = useRef(30);
   const height = useRef(100);
   const fleetRef = useRef(null);
-  let requestId;
+  const shipRef = useRef(null);
   let speed = 20;
   let interval = 1000;
 
   const moveFleet = () => {
     let newHeight;
-    typeFlag.current = !typeFlag.current;
     // console.log('height', height);
     if (position.current > 530) {
       speed = -speed;
@@ -66,8 +64,8 @@ const App = () => {
     }, interval);
   };
 
-  const startInvasion = (fps) => {
-    requestId = window.requestAnimationFrame(moveFleet);
+  const startInvasion = () => {
+    window.requestAnimationFrame(moveFleet);
   };
 
   const changeStatus = (shipId) => {
@@ -82,16 +80,16 @@ const App = () => {
     fleetRef.current.style.top = '100px';
     startInvasion();
   }, []);
-
   return (
     <StyledApp className="App">
+      {console.log('rendering App')}
       <GlobalStyle />
       <StyledTitle>Spayed Invaders</StyledTitle>
       <Fleet
         ref={fleetRef}
         fleet={fleetStatus.fleet}
         changeStatus={changeStatus}
-        typeFlag={typeFlag.current}
+        shipRef={shipRef}
       />
       <ShieldRow />
       <Base />
