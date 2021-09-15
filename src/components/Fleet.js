@@ -27,7 +27,7 @@ const Fleet = forwardRef(({ fleet, changeStatus, shipRef }, ref) => {
         status={fleet[index]}
         id={index}
         key={index}
-        type={index <= 10 ? ['e', 'q'] : index <= 32 ? ['b', 'c'] : ['f', 'g']}
+        type={index <= 10 ? 'e' : index <= 32 ? 'b' : 'f'}
         ref={shipRef}
       />
     );

@@ -1,10 +1,8 @@
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const StyledAlien = styled.span.attrs((props) => ({
-  // id: props.id,
-  visibility: props.status ? 'visible' : 'hidden'
-}))`
+const StyledAlien = styled.span`
+  visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,6 +13,7 @@ const StyledAlien = styled.span.attrs((props) => ({
     transparent 1px,
     transparent 2px
   );
+  background-clip: text;
   -webkit-background-clip: text;
   font-family: 'invaders';
   color: transparent;
@@ -24,22 +23,14 @@ const StyledAlien = styled.span.attrs((props) => ({
   height: 2.65rem;
   margin: 0 0.3rem;
   visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
-  &:after {
-    content: '${(props) => props.type[0]}';
-    animation: walk 2s linear infinite;
-  }
-
-  @keyframes walk {
-    100% {
-      content: 'b';
-    }
-  }
 `;
 
 const AlienShip = forwardRef(({ status, id, type }, ref) => {
-  console.log('ship render');
+  // console.log('ship render');
   return (
-    <StyledAlien id={id} status={status} type={type} ref={ref}></StyledAlien>
+    <StyledAlien id={id} status={status} ref={ref}>
+      {type}
+    </StyledAlien>
   );
 });
 

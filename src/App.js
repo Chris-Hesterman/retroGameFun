@@ -39,16 +39,24 @@ const App = () => {
   const height = useRef(100);
   const fleetRef = useRef(null);
   const shipRef = useRef(null);
+  const shipTypes = {
+    e: 'q',
+    q: 'e',
+    b: 'c',
+    c: 'b',
+    f: 'g',
+    g: 'f'
+  };
   let speed = 20;
   let interval = 1000;
 
   const moveFleet = () => {
     let newHeight;
-    // console.log('height', height);
-    if (position.current > 560) {
+    const ships = fleetRef.current.childNodes;
+
+    if (position.current > 580) {
       speed = -speed;
       interval -= 75;
-      console.log(speed);
       newHeight = height.current + 25;
       height.current = newHeight;
       fleetRef.current.style.top = `${newHeight}px`;
@@ -65,6 +73,10 @@ const App = () => {
 
     fleetRef.current.style.left = `${newposition}px`;
     position.current = newposition;
+
+    for (let ship of ships) {
+      ship.textContent = shipTypes[ship.textContent];
+    }
 
     setTimeout(() => {
       window.requestAnimationFrame(moveFleet);
