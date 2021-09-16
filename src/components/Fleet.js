@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { forwardRef } from 'react';
 
 const StyledFleet = styled.div`
-  display: flex;
+  display: none;
   justify-content: center;
   flex-wrap: wrap;
   width: 600px;

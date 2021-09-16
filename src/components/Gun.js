@@ -16,15 +16,14 @@ const StyledGun = styled.span`
 const Gun = () => {
   const posiRef = useRef(window.visualViewport.width / 2 - 40);
   const [moving, setMoving] = useState(false);
-  const speedRef = useRef(0);
+  let currentSpeed = 0;
   const keyRef = useRef({ pressed: false });
-  let requestId = useRef();
+  const requestId = useRef();
 
   const gunRef = useRef();
 
   const moveGun = (time) => {
-    // console.log('animating', time);
-    if (speedRef.current === 0) {
+    if (currentSpeed === 0) {
       window.cancelAnimationFrame(requestId);
       return;
     }
@@ -39,7 +38,7 @@ const Gun = () => {
       setMoving(false);
       return;
     }
-    posiRef.current += speedRef.current;
+    posiRef.current += currentSpeed;
     gunRef.current.style.left = `${posiRef.current}px`;
     // console.log('handling move');
 
@@ -47,24 +46,24 @@ const Gun = () => {
   };
 
   const handleMove = (e) => {
-    let newSpeedRef;
-    const speed = 5;
+    let newcurrentSpeed;
+    const speed = 3;
 
-    if (e.repeat && speedRef.current) {
+    if (e.repeat && currentSpeed) {
       return;
     }
     console.log('event firing', e.which);
     if (e.key === 'ArrowRight' && !keyRef.current.pressed !== e.key) {
-      newSpeedRef = speed;
+      newcurrentSpeed = speed;
       keyRef.current.pressed = e.key;
-      speedRef.current = newSpeedRef;
+      currentSpeed = newcurrentSpeed;
       setMoving(true);
     }
 
     if (e.key === 'ArrowLeft' && !keyRef.current.pressed !== e.key) {
-      newSpeedRef = -speed;
+      newcurrentSpeed = -speed;
       keyRef.current.pressed = e.key;
-      speedRef.current = newSpeedRef;
+      currentSpeed = newcurrentSpeed;
       setMoving(true);
     }
 
@@ -74,7 +73,7 @@ const Gun = () => {
   const handleStop = (e) => {
     console.log('key up');
     keyRef.current.pressed = false;
-    speedRef.current = 0;
+    currentSpeed = 0;
     setMoving(false);
     window.cancelAnimationFrame(requestId);
   };
@@ -86,7 +85,7 @@ const Gun = () => {
   }, []);
 
   return (
-    <StyledGunWrapper position={posiRef} speed={speedRef} ref={gunRef}>
+    <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
       <StyledGun>w</StyledGun>
     </StyledGunWrapper>
   );
