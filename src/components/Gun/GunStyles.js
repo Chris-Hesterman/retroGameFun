@@ -5,7 +5,7 @@ export const StyledGunWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: absolute;
-  left: calc(50vw - 40px);
+  left: calc(50vw - 26px);
   font-family: 'invaders';
   font-size: 5rem;
   color: transparent;
@@ -18,4 +18,14 @@ export const StyledGunWrapper = styled.div`
   );
   background-clip: text;
   -webkit-background-clip: text;
+`;
+
+export const StyledShot = styled.div`
+  font-size: 1rem;
+  font-weight: bold;
+  color: lime;
+  position: absolute;
+  left: 50vw;
+  bottom: -20px;
+  /* display: ; */
 `;

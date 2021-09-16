@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { StyledGunWrapper } from './GunStyles';
+import { StyledGunWrapper, StyledShot } from './GunStyles';
 
 const Gun = () => {
   const posiRef = useRef(window.visualViewport.width / 2 - 40);
+  let shotHeight = 500;
   const [moving, setMoving] = useState(false);
   let currentSpeed = 0;
   const keyRef = useRef({ pressed: false });
   const requestId = useRef();
-
   const gunRef = useRef();
+  let gunSpeed = 4;
 
   const moveGun = (time) => {
     if (currentSpeed === 0) {
@@ -20,7 +21,9 @@ const Gun = () => {
       posiRef.current <= 10
     ) {
       posiRef.current =
-        posiRef.current <= 50 ? posiRef.current + 4 : posiRef.current - 4;
+        posiRef.current <= 50
+          ? posiRef.current + gunSpeed
+          : posiRef.current - gunSpeed;
       gunRef.current.style.left = `${posiRef.current}px`;
       window.cancelAnimationFrame(requestId);
       setMoving(false);
@@ -35,6 +38,9 @@ const Gun = () => {
     let newcurrentSpeed;
     const speed = 3;
 
+    if (e.type === 'keydown' && e.key === ' ') {
+      fireGun(posiRef.current);
+    }
     if (e.repeat && currentSpeed) {
       return;
     }
@@ -53,8 +59,14 @@ const Gun = () => {
     requestId.current = moving ? null : window.requestAnimationFrame(moveGun);
   };
 
+  const fireGun = (position) => {
+    console.log(position);
+  };
+
+  const updateShot = () => {};
+
   const handleStop = (e) => {
-    console.log('key up');
+    // console.log('key up');
     keyRef.current.pressed = false;
     currentSpeed = 0;
     setMoving(false);
@@ -69,9 +81,12 @@ const Gun = () => {
   }, []);
 
   return (
-    <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
-      w
-    </StyledGunWrapper>
+    <div>
+      <StyledShot>|</StyledShot>
+      <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
+        w
+      </StyledGunWrapper>
+    </div>
   );
 };
 

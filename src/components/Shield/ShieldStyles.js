@@ -5,7 +5,12 @@ export const StyledShield = styled.div`
   justify-content: center;
   height: 5rem;
   width: 8rem;
-  background-color: lime;
-  color: black;
+  background-image: repeating-linear-gradient(
+    20deg,
+    lime,
+    lime 1px,
+    transparent 1px,
+    transparent 2px
+  );
   border-radius: 25% 25% 0 0;
 `;
