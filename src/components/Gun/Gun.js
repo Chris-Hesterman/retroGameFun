@@ -1,17 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
-
-const StyledGunWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  left: calc(50vw - 40px);
-`;
-const StyledGun = styled.span`
-  font-family: 'invaders';
-  font-size: 5rem;
-`;
+import { StyledGunWrapper } from './GunStyles';
 
 const Gun = () => {
   const posiRef = useRef(window.visualViewport.width / 2 - 40);
@@ -40,8 +28,6 @@ const Gun = () => {
     }
     posiRef.current += currentSpeed;
     gunRef.current.style.left = `${posiRef.current}px`;
-    // console.log('handling move');
-
     window.requestAnimationFrame(moveGun);
   };
 
@@ -52,21 +38,18 @@ const Gun = () => {
     if (e.repeat && currentSpeed) {
       return;
     }
-    console.log('event firing', e.which);
     if (e.key === 'ArrowRight' && !keyRef.current.pressed !== e.key) {
       newcurrentSpeed = speed;
       keyRef.current.pressed = e.key;
       currentSpeed = newcurrentSpeed;
       setMoving(true);
     }
-
     if (e.key === 'ArrowLeft' && !keyRef.current.pressed !== e.key) {
       newcurrentSpeed = -speed;
       keyRef.current.pressed = e.key;
       currentSpeed = newcurrentSpeed;
       setMoving(true);
     }
-
     requestId.current = moving ? null : window.requestAnimationFrame(moveGun);
   };
 
@@ -82,11 +65,12 @@ const Gun = () => {
     console.log('using effect');
     window.addEventListener('keydown', handleMove);
     window.addEventListener('keyup', handleStop);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
-      <StyledGun>w</StyledGun>
+      w
     </StyledGunWrapper>
   );
 };

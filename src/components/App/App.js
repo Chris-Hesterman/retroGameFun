@@ -1,72 +1,11 @@
 import { useState, useRef } from 'react';
-import { initialState } from './utils/initialState';
-import { Howl } from 'howler';
-import { GlobalStyle } from './GlobalStyle';
-import Fleet from './components/Fleet';
-import ShieldRow from './components/ShieldRow';
-import Base from './components/Base';
-import styled from 'styled-components';
-import space from './images/space.jpg';
-
-const StyledApp = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  color: lime;
-  background: black;
-  background: linear-gradient(
-      0deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    ),
-    url(${space});
-
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
-  overflow: hidden;
-`;
-
-const StyledTitle = styled.h1`
-  color: black;
-  text-shadow: 2px 2px 2px lime, 0 2px 2px lime, 2px 0 2px lime, -2px 0 2px lime,
-    -2px -2px 2px lime, 0 -2px 2px lime;
-`;
-
-const StyledButton = styled.button`
-  margin-top: 10vh;
-  color: lime;
-  font-size: 2.5rem;
-  font-weight: bold;
-  background: black;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid lime;
-  border-radius: 10px;
-  height: 4rem;
-  width: 10rem;
-  box-shadow: 2px 2px 3px lime, -2px -2px 3px lime, -2px 2px 3px lime,
-    2px -2px 3px lime;
-  animation: throb 2s ease-in-out infinite;
-  transition: all 1s ease-out;
-  &:hover {
-    cursor: pointer;
-  }
-  @keyframes throb {
-    0% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-  }
-`;
+import { initialState } from '../../utils/initialState';
+import { generateSoundModels } from '../../utils/functions';
+import { GlobalStyle } from '../../GlobalStyle';
+import { StyledApp, StyledTitle, StyledButton } from './AppStyles';
+import Fleet from '../Fleet/Fleet';
+import ShieldRow from '../ShieldRow/ShieldRow';
+import Base from '../Base/Base';
 
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
@@ -75,14 +14,16 @@ const App = () => {
   const height = useRef(100);
   const fleetRef = useRef(null);
   const shipRef = useRef(null);
+  let speed = 10;
+  let interval = 800;
   let soundIndex = 0;
   const soundPaths = [
     '../assets/7.mp3',
     '../assets/5.mp3',
     '../assets/6.mp3',
-    '../assets/7.mp3'
+    '../assets/5.mp3'
   ];
-  let soundArray = [7, 4, 5, 6];
+  let soundArray = [7, 4, 5, 4];
   const shipTypes = {
     e: 'q',
     q: 'e',
@@ -91,14 +32,13 @@ const App = () => {
     f: 'g',
     g: 'f'
   };
-  let speed = 10;
-  let interval = 500;
 
   const moveFleet = () => {
     let newHeight;
-    soundArray[soundIndex].play();
     const ships = fleetRef.current.childNodes;
     let moveSideways = true;
+
+    soundArray[soundIndex].play();
 
     if (position.current > 580) {
       speed = -speed;
@@ -140,10 +80,6 @@ const App = () => {
     }, interval);
   };
 
-  const startInvasion = () => {
-    window.requestAnimationFrame(moveFleet);
-  };
-
   const changeStatus = (shipId) => {
     setFleetStatus((prevFleetStatus) => {
       prevFleetStatus.fleet[shipId] = 0;
@@ -155,16 +91,10 @@ const App = () => {
     fleetRef.current.style.left = '20px';
     fleetRef.current.style.top = '100px';
     setStarted(true);
-    soundArray = soundArray.map((sound, index) => {
-      return new Howl({
-        src: [soundPaths[index]],
-        format: ['mp3'],
-        html5: true
-      });
-    });
+    soundArray = generateSoundModels(soundArray, soundPaths);
     setTimeout(() => {
       fleetRef.current.style.display = 'flex';
-      startInvasion();
+      window.requestAnimationFrame(moveFleet);
     }, 1500);
   };
 

@@ -1,7 +1,6 @@
-import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-const StyledAlien = styled.span`
+export const StyledAlien = styled.span`
   visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
   display: flex;
   justify-content: center;
@@ -24,14 +23,3 @@ const StyledAlien = styled.span`
   margin: 0 0.3rem;
   visibility: ${(props) => (props.status ? 'visible' : 'hidden')};
 `;
-
-const AlienShip = forwardRef(({ status, id, type }, ref) => {
-  // console.log('ship render');
-  return (
-    <StyledAlien id={id} status={status} ref={ref}>
-      {type}
-    </StyledAlien>
-  );
-});
-
-export default AlienShip;
