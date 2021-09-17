@@ -1,3 +1,4 @@
+import { Howl } from 'howler';
 import { useState, useRef, useEffect } from 'react';
 import { StyledGunWrapper, StyledShot } from './GunStyles';
 
@@ -9,7 +10,6 @@ const Gun = () => {
   const keyRef = useRef({ pressed: false });
   const requestId = useRef();
   let shotRequestId;
-
   const gunRef = useRef();
   const shotRef = useRef();
   let gunSpeed = 4;
@@ -40,13 +40,30 @@ const Gun = () => {
   const handleMove = (e) => {
     let newcurrentSpeed;
     const speed = 3;
-    console.log(e.key);
+    const shotSound1 = new Howl({
+      src: ['../assets/11.mp3'],
+      html5: true,
+      format: ['mp3'],
+      rate: 0.8
+    });
+    // const shotSound2 = new Howl({
+    //   src: ['../assets/1.mp3'],
+    //   html5: true,
+    //   format: ['mp3'],
+    //   volume: 0.5,
+    //   rate: 0.8
+    // });
 
     if (e.type === 'keydown' && e.key === ' ') {
       if (shotRef.current.style.display !== 'inline-block') {
         shotRef.current.style.display = 'inline-block';
         shotRef.current.style.left = `${posiRef.current + 25}px`;
+
         fireGun(posiRef.current);
+        shotSound1.play();
+        // setTimeout(() => {
+        //   shotSound2.play();
+        // }, 110);
       }
     }
     if (e.repeat && currentSpeed) {
@@ -72,8 +89,8 @@ const Gun = () => {
   };
 
   const updateShot = () => {
-    shotRef.current.style.bottom = `${shotHeight + 10}px`;
-    shotHeight += 10;
+    shotRef.current.style.bottom = `${shotHeight + 15}px`;
+    shotHeight += 15;
     if (shotHeight < 550) {
       window.requestAnimationFrame(updateShot);
     } else {
@@ -85,7 +102,6 @@ const Gun = () => {
   };
 
   const handleStop = (e) => {
-    // console.log('key up');
     keyRef.current.pressed = false;
     currentSpeed = 0;
     setMoving(false);

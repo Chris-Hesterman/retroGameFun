@@ -2,7 +2,7 @@ import React from 'react';
 import { StyledBase } from './BaseStyles.js';
 import Gun from '../Gun/Gun';
 
-const Base = () => {
+const Base = ({ shotSound }) => {
   return (
     <StyledBase>
       <Gun />

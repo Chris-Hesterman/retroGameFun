@@ -24,6 +24,7 @@ const App = () => {
     '../assets/5.mp3'
   ];
   let soundArray = [7, 4, 5, 4];
+  let shotSound;
   const shipTypes = {
     e: 'q',
     q: 'e',
@@ -91,7 +92,10 @@ const App = () => {
     fleetRef.current.style.left = '20px';
     fleetRef.current.style.top = '100px';
     setStarted(true);
+
     soundArray = generateSoundModels(soundArray, soundPaths);
+    shotSound = generateSoundModels([4], soundPaths);
+    console.log('shotsound', shotSound);
     setTimeout(() => {
       fleetRef.current.style.display = 'flex';
       window.requestAnimationFrame(moveFleet);
