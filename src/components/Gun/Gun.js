@@ -2,13 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import { StyledGunWrapper, StyledShot } from './GunStyles';
 
 const Gun = () => {
-  const posiRef = useRef(window.visualViewport.width / 2 - 40);
-  let shotHeight = 500;
+  const posiRef = useRef(window.visualViewport.width / 2 - 26);
+  let shotHeight = -30;
   const [moving, setMoving] = useState(false);
   let currentSpeed = 0;
   const keyRef = useRef({ pressed: false });
   const requestId = useRef();
+  let shotRequestId;
+
   const gunRef = useRef();
+  const shotRef = useRef();
   let gunSpeed = 4;
 
   const moveGun = (time) => {
@@ -37,9 +40,14 @@ const Gun = () => {
   const handleMove = (e) => {
     let newcurrentSpeed;
     const speed = 3;
+    console.log(e.key);
 
     if (e.type === 'keydown' && e.key === ' ') {
-      fireGun(posiRef.current);
+      if (shotRef.current.style.display !== 'inline-block') {
+        shotRef.current.style.display = 'inline-block';
+        shotRef.current.style.left = `${posiRef.current + 25}px`;
+        fireGun(posiRef.current);
+      }
     }
     if (e.repeat && currentSpeed) {
       return;
@@ -59,11 +67,22 @@ const Gun = () => {
     requestId.current = moving ? null : window.requestAnimationFrame(moveGun);
   };
 
-  const fireGun = (position) => {
-    console.log(position);
+  const fireGun = () => {
+    shotRequestId = window.requestAnimationFrame(updateShot);
   };
 
-  const updateShot = () => {};
+  const updateShot = () => {
+    shotRef.current.style.bottom = `${shotHeight + 10}px`;
+    shotHeight += 10;
+    if (shotHeight < 550) {
+      window.requestAnimationFrame(updateShot);
+    } else {
+      shotRef.current.style.display = 'none';
+      shotRef.current.style.bottom = '-30px';
+      shotHeight = -30;
+      window.cancelAnimationFrame(shotRequestId);
+    }
+  };
 
   const handleStop = (e) => {
     // console.log('key up');
@@ -82,7 +101,7 @@ const Gun = () => {
 
   return (
     <div>
-      <StyledShot>|</StyledShot>
+      <StyledShot ref={shotRef}>|</StyledShot>
       <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
         w
       </StyledGunWrapper>
