@@ -23,6 +23,7 @@ export const StyledApp = styled.div`
 
 export const StyledTitle = styled.h1`
   color: black;
+  word-spacing: 1rem;
   text-shadow: 2px 2px 2px lime, 0 2px 2px lime, 2px 0 2px lime, -2px 0 2px lime,
     -2px -2px 2px lime, 0 -2px 2px lime;
 `;

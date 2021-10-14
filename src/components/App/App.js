@@ -106,7 +106,7 @@ const App = () => {
     <StyledApp className="App">
       {console.log('rendering App')}
       <GlobalStyle />
-      <StyledTitle>Spayed Invaders</StyledTitle>
+      <StyledTitle>Spaced Invaders</StyledTitle>
       {!started && <StyledButton onClick={handleStart}>START</StyledButton>}
       <Fleet
         ref={fleetRef}

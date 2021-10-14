@@ -41,18 +41,10 @@ const Gun = () => {
     let newcurrentSpeed;
     const speed = 3;
     const shotSound1 = new Howl({
-      src: ['../assets/11.mp3'],
+      src: ['../assets/1.mp3'],
       html5: true,
-      format: ['mp3'],
-      rate: 0.8
+      format: ['mp3']
     });
-    // const shotSound2 = new Howl({
-    //   src: ['../assets/1.mp3'],
-    //   html5: true,
-    //   format: ['mp3'],
-    //   volume: 0.5,
-    //   rate: 0.8
-    // });
 
     if (e.type === 'keydown' && e.key === ' ') {
       if (shotRef.current.style.display !== 'inline-block') {
@@ -61,9 +53,6 @@ const Gun = () => {
 
         fireGun(posiRef.current);
         shotSound1.play();
-        // setTimeout(() => {
-        //   shotSound2.play();
-        // }, 110);
       }
     }
     if (e.repeat && currentSpeed) {
