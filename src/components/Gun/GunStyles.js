@@ -25,7 +25,5 @@ export const StyledShot = styled.div`
   font-weight: bold;
   color: lime;
   position: absolute;
-  left: calc(50vw + 100px);
-  bottom: -20px;
   display: none;
 `;

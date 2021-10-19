@@ -5,6 +5,7 @@ import { StyledGunWrapper, StyledShot } from './GunStyles';
 const Gun = () => {
   const posiRef = useRef(window.visualViewport.width / 2 - 26);
   let shotHeight = -30;
+  // const movingRef = useRef(false);
   const [moving, setMoving] = useState(false);
   let currentSpeed = 0;
   const keyRef = useRef({ pressed: false });
@@ -30,6 +31,7 @@ const Gun = () => {
       gunRef.current.style.left = `${posiRef.current}px`;
       window.cancelAnimationFrame(requestId);
       setMoving(false);
+      // movingRef.current = false;
       return;
     }
     posiRef.current += currentSpeed;
@@ -38,7 +40,7 @@ const Gun = () => {
   };
 
   const handleMove = (e) => {
-    let newcurrentSpeed;
+    let newCurrentSpeed;
     const speed = 3;
     const shotSound1 = new Howl({
       src: ['../assets/1.mp3'],
@@ -59,16 +61,18 @@ const Gun = () => {
       return;
     }
     if (e.key === 'ArrowRight' && !keyRef.current.pressed !== e.key) {
-      newcurrentSpeed = speed;
+      newCurrentSpeed = speed;
       keyRef.current.pressed = e.key;
-      currentSpeed = newcurrentSpeed;
+      currentSpeed = newCurrentSpeed;
       setMoving(true);
+      // movingRef.current = true;
     }
     if (e.key === 'ArrowLeft' && !keyRef.current.pressed !== e.key) {
-      newcurrentSpeed = -speed;
+      newCurrentSpeed = -speed;
       keyRef.current.pressed = e.key;
-      currentSpeed = newcurrentSpeed;
+      currentSpeed = newCurrentSpeed;
       setMoving(true);
+      // movingRef.current = true;
     }
     requestId.current = moving ? null : window.requestAnimationFrame(moveGun);
   };
@@ -94,6 +98,7 @@ const Gun = () => {
     keyRef.current.pressed = false;
     currentSpeed = 0;
     setMoving(false);
+    // movingRef.current = false;
     window.cancelAnimationFrame(requestId);
   };
 
@@ -106,6 +111,7 @@ const Gun = () => {
 
   return (
     <div>
+      {console.log('rendering gun')}
       <StyledShot ref={shotRef}>|</StyledShot>
       <StyledGunWrapper position={posiRef} speed={currentSpeed} ref={gunRef}>
         w
