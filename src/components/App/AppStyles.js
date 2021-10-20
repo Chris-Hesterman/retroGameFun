@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import space from '../../images/space.jpg';
+import space from '../../images/space.webp';
 
 export const StyledApp = styled.div`
   display: flex;
