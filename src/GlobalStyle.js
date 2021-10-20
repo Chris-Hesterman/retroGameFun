@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: 'invaders';
     src: url(${invaders})
       format('truetype');
+    font-display: swap;
   }
 
   html {
