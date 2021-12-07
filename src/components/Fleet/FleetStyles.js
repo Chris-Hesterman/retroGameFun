@@ -6,7 +6,7 @@ export const StyledFleet = styled.div`
   flex-wrap: wrap;
   width: 600px;
   max-width: 620px;
-  height: 265px;
+  max-height: 265px;
   background: none;
   position: absolute;
   row-gap: 0;

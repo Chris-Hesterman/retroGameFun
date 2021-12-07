@@ -10,12 +10,12 @@ import Base from '../Base/Base';
 const App = () => {
   const [fleetStatus, setFleetStatus] = useState(initialState);
   const [started, setStarted] = useState(false);
-  const position = useRef(20);
-  const height = useRef(100);
+  const fleetLeft = useRef(20);
+  const fleetTop = useRef(100);
   const fleetRef = useRef(null);
   const shipRef = useRef(null);
   let speed = 10;
-  let interval = 800;
+  let interval = 500;
   let soundIndex = 0;
   const soundPaths = [
     '../assets/7.mp3',
@@ -35,37 +35,38 @@ const App = () => {
   };
 
   const moveFleet = () => {
-    let newHeight;
+    console.log('App Fleet Left : ', fleetLeft.current);
+    let newfleetTop;
     const ships = fleetRef.current.childNodes;
     let moveSideways = true;
 
     soundArray[soundIndex].play();
 
-    if (position.current > 580) {
+    if (fleetLeft.current > 580) {
       speed = -speed;
       interval -= 75;
-      newHeight = height.current + 25;
-      height.current = newHeight;
-      fleetRef.current.style.top = `${newHeight}px`;
+      newfleetTop = fleetTop.current + 25;
+      fleetTop.current = newfleetTop;
+      fleetRef.current.style.top = `${newfleetTop}px`;
       moveSideways = false;
-      position.current = 580;
+      fleetLeft.current = 580;
     }
-    if (position.current < 20) {
+    if (fleetLeft.current < 20) {
       speed = -speed;
       interval -= 75;
-      newHeight = height.current + 25;
-      height.current = newHeight;
-      fleetRef.current.style.top = `${newHeight}px`;
+      newfleetTop = fleetTop.current + 25;
+      fleetTop.current = newfleetTop;
+      fleetRef.current.style.top = `${newfleetTop}px`;
       moveSideways = false;
-      position.current = 20;
+      fleetLeft.current = 20;
     }
 
-    const newposition = moveSideways
-      ? position.current + speed
-      : position.current;
+    const newfleetLeft = moveSideways
+      ? fleetLeft.current + speed
+      : fleetLeft.current;
 
-    fleetRef.current.style.left = `${newposition}px`;
-    position.current = newposition;
+    fleetRef.current.style.left = `${newfleetLeft}px`;
+    fleetLeft.current = newfleetLeft;
 
     for (let ship of ships) {
       moveSideways = true;
@@ -115,7 +116,7 @@ const App = () => {
         shipRef={shipRef}
       />
       <ShieldRow />
-      <Base />
+      <Base fleetLeft={fleetLeft.current} fleetTop={fleetTop.current} />
     </StyledApp>
   );
 };
