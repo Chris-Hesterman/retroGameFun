@@ -67,9 +67,8 @@ const App = () => {
     fleetRef.current.style.left = `${newfleetLeft}px`;
     fleetLeft.current = newfleetLeft;
 
-    for (let ship of ships) {
-      moveSideways = true;
-      ship.textContent = shipTypes[ship.textContent];
+    for (let i = 0; i < 55; i++) {
+      ships[i].textContent = shipTypes[ships[i].textContent];
     }
 
     setTimeout(() => {
@@ -99,7 +98,7 @@ const App = () => {
     setTimeout(() => {
       fleetRef.current.style.display = 'flex';
       window.requestAnimationFrame(moveFleet);
-    }, 1500);
+    }, 1000);
   };
 
   return (
