@@ -23,6 +23,7 @@ const App = () => {
     '../assets/5.mp3'
   ];
   let soundArray = [7, 4, 5, 4];
+  // eslint-disable-next-line no-unused-vars
   let shotSound;
   const shipTypes = {
     e: 'q',
