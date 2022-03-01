@@ -1,15 +1,15 @@
 import AlienShip from '../components/AlienShip/AlienShip';
 import { Howl } from 'howler';
+import { initialState } from './initialState';
 
-export const makeShips = (fleet, ref) => {
-  return fleet.map((ship, index, array) => {
+export const makeShips = () => {
+  return initialState.fleet.map((ship, index) => {
     return (
       <AlienShip
-        status={fleet[index]}
+        status={initialState.fleet[index]}
         id={index}
         key={index}
         type={index <= 10 ? 'e' : index <= 32 ? 'b' : 'f'}
-        ref={ref}
       />
     );
   });

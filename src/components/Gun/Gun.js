@@ -2,10 +2,9 @@ import { Howl } from 'howler';
 import { useState, useRef, useEffect } from 'react';
 import { StyledGunWrapper, StyledShot } from './GunStyles';
 
-const Gun = ({ fleetLeft, fleetTop }) => {
+const Gun = () => {
   const positionRef = useRef(window.visualViewport.width / 2 - 26);
   let shotHeight = -30;
-  // const movingRef = useRef(false);
   const [moving, setMoving] = useState(false);
   let currentSpeed = 0;
   const keyRef = useRef({ pressed: false });
@@ -16,8 +15,7 @@ const Gun = ({ fleetLeft, fleetTop }) => {
   const shotXRef = useRef();
   let gunSpeed = 4;
 
-  const moveGun = (time) => {
-    console.log('Fleet Left : ', fleetLeft);
+  const moveGun = () => {
     if (currentSpeed === 0) {
       window.cancelAnimationFrame(requestId);
       return;
@@ -33,7 +31,7 @@ const Gun = ({ fleetLeft, fleetTop }) => {
       gunRef.current.style.left = `${positionRef.current}px`;
       window.cancelAnimationFrame(requestId);
       setMoving(false);
-      // movingRef.current = false;
+
       return;
     }
     positionRef.current += currentSpeed;
@@ -67,14 +65,12 @@ const Gun = ({ fleetLeft, fleetTop }) => {
       keyRef.current.pressed = e.key;
       currentSpeed = newCurrentSpeed;
       setMoving(true);
-      // movingRef.current = true;
     }
     if (e.key === 'ArrowLeft' && !keyRef.current.pressed !== e.key) {
       newCurrentSpeed = -speed;
       keyRef.current.pressed = e.key;
       currentSpeed = newCurrentSpeed;
       setMoving(true);
-      // movingRef.current = true;
     }
     requestId.current = moving ? null : window.requestAnimationFrame(moveGun);
   };
@@ -89,16 +85,7 @@ const Gun = ({ fleetLeft, fleetTop }) => {
     shotHeight += 8;
     if (shotHeight < 550) {
       window.requestAnimationFrame(updateShot);
-      // test shot y axis detect, change color for test
-      if (
-        shotHeight > fleetTop + 265 &&
-        shotXRef.current > fleetLeft &&
-        shotXRef < fleetLeft + 600
-      ) {
-        shotRef.current.style.color = 'red';
-      }
     } else {
-      shotRef.current.style.color = 'lime';
       shotRef.current.style.display = 'none';
       shotRef.current.style.bottom = '-30px';
       shotHeight = -30;

@@ -12,8 +12,7 @@ const App = () => {
   const [started, setStarted] = useState(false);
   const fleetLeft = useRef(20);
   const fleetTop = useRef(100);
-  const fleetRef = useRef(null);
-  const shipRef = useRef(null);
+  const fleetRef = useRef();
   let speed = 10;
   let interval = 500;
   let soundIndex = 0;
@@ -35,7 +34,7 @@ const App = () => {
   };
 
   const moveFleet = () => {
-    console.log('App Fleet Left : ', fleetLeft.current);
+    // console.log('App Fleet Left : ', fleetLeft.current);
     let newfleetTop;
     const ships = fleetRef.current.childNodes;
     let moveSideways = true;
@@ -96,7 +95,7 @@ const App = () => {
 
     soundArray = generateSoundModels(soundArray, soundPaths);
     shotSound = generateSoundModels([4], soundPaths);
-    console.log('shotsound', shotSound);
+
     setTimeout(() => {
       fleetRef.current.style.display = 'flex';
       window.requestAnimationFrame(moveFleet);
@@ -113,10 +112,9 @@ const App = () => {
         ref={fleetRef}
         fleet={fleetStatus.fleet}
         changeStatus={changeStatus}
-        shipRef={shipRef}
       />
       <ShieldRow />
-      <Base fleetLeft={fleetLeft.current} fleetTop={fleetTop.current} />
+      <Base />
     </StyledApp>
   );
 };

@@ -1,12 +1,12 @@
-import { forwardRef } from 'react';
 import { StyledAlien } from './AlienShipStyles';
 
-const AlienShip = forwardRef(({ status, id, type }, ref) => {
+const AlienShip = ({ status, id, type }) => {
   return (
-    <StyledAlien id={id} status={status} ref={ref}>
+    <StyledAlien id={id} status={status}>
+      {console.log('rendering ship')}
       {type}
     </StyledAlien>
   );
-});
+};
 
 export default AlienShip;

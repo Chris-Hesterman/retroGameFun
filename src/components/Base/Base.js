@@ -2,10 +2,11 @@ import React from 'react';
 import { StyledBase } from './BaseStyles.js';
 import Gun from '../Gun/Gun';
 
-const Base = ({ shotSound, fleetLeft, fleetTop }) => {
+const Base = () => {
   return (
     <StyledBase>
-      <Gun fleetLeft={fleetLeft} fleetTop={fleetTop} />
+      {console.log('render base')}
+      <Gun />
     </StyledBase>
   );
 };
